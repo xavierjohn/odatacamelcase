@@ -1,0 +1,12 @@
+@LearnOdataList_HostAddress = http://localhost:5090
+
+GET {{LearnOdataList_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+
+GET {{LearnOdataList_HostAddress}}/weatherforecast/items?$select=name
+Accept: application/json
+
+###
