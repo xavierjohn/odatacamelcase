@@ -10,3 +10,8 @@ GET {{LearnOdataList_HostAddress}}/odata/customers?$select=name
 Accept: application/json
 
 ###
+
+GET {{LearnOdataList_HostAddress}}/odata/customers/2
+Accept: application/json
+
+###
