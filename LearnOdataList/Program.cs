@@ -1,18 +1,18 @@
 using Microsoft.AspNetCore.OData;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using LearnOdataList;
+using Microsoft.OData.ModelBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers()
-    .AddOData(options => options.Select().Expand().Filter().OrderBy().SetMaxTop(1000).Count())
-    .AddJsonOptions(options =>
-    {
-      options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase; // Use camelCase
-      options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull; // Ignore null values
-    }); ;
+builder.Services.AddControllers().AddOData(
+    options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null).AddRouteComponents(
+        "odata",
+       EdmModel.GetEdmModel()));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
